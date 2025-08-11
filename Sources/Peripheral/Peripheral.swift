@@ -1,7 +1,6 @@
 //  Copyright (c) 2021 Manuel Fernandez-Peix Perez. All rights reserved.
 
 import Foundation
-@preconcurrency import CoreBluetooth
 import Combine
 import os.log
 
@@ -55,7 +54,7 @@ public final class Peripheral: Sendable {
         #endif
     }
     
-    public let cbPeripheral: CBPeripheral
+    public nonisolated let cbPeripheral: CBPeripheral
     
     private var context: PeripheralContext {
         cbPeripheralDelegate.context

@@ -1,7 +1,6 @@
 //  Copyright (c) 2023 Manuel Fernandez-Peix Perez. All rights reserved.
 
 import Foundation
-import CoreBluetooth
 import os.log
 
 final class PeripheralDelegate: NSObject, Sendable {

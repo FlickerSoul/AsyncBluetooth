@@ -1,7 +1,6 @@
 //  Copyright (c) 2021 Manuel Fernandez-Peix Perez. All rights reserved.
 
 import Foundation
-@preconcurrency import CoreBluetooth
 import Combine
 import os.log
 
@@ -38,16 +37,26 @@ public final class CentralManager: Sendable {
         }
     }
     
-    private let cbCentralManager: CBCentralManager
+    private nonisolated let cbCentralManager: CBCentralManager
     private let context: CentralManagerContext
-    private let cbCentralManagerDelegate: CBCentralManagerDelegate
+    private nonisolated let cbCentralManagerDelegate: CBCentralManagerDelegate
     
     // MARK: Constructors
-
-    public init(dispatchQueue: DispatchQueue? = nil, options: [String: Any]? = nil) {
+    
+    public init(cbCentralManager: CBCentralManager) {
         self.context = CentralManagerContext()
         self.cbCentralManagerDelegate = DelegateWrapper(context: self.context)
-        self.cbCentralManager = CBCentralManager(delegate: cbCentralManagerDelegate, queue: dispatchQueue, options: options)
+        self.cbCentralManager = cbCentralManager
+        self.cbCentralManager.delegate = cbCentralManagerDelegate
+    }
+    
+    public convenience init(dispatchQueue: DispatchQueue? = nil, options: [String: Any]? = nil) {
+        // FIXME: adding delegate later could cause data race? 
+        #if DEBUG
+        self.init(cbCentralManager: .using(delegate: nil, queue: dispatchQueue, options: options))
+        #else
+        self.init(CBCentralManager(delegate: nil, queue: dispatchQueue, options: options))
+        #endif
     }
     
     // MARK: Public

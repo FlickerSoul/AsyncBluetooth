@@ -1,7 +1,6 @@
 //  Copyright (c) 2021 Manuel Fernandez-Peix Perez. All rights reserved.
 
 import Foundation
-import CoreBluetooth
 
 extension Peripheral {
     /// Reads and parses the value of a characteristic with a given identifier, of a service with a

@@ -1,7 +1,6 @@
 //  Copyright (c) 2021 Manuel Fernandez-Peix Perez. All rights reserved.
 
 import Foundation
-import CoreBluetooth
 
 /// General helper functions used by the Central Manager.
 struct CentralManagerUtils {

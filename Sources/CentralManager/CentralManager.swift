@@ -150,10 +150,11 @@ public final class CentralManager: Sendable {
         }
     }
 
-    @available(macOS, unavailable)
+    #if !os(macOS)
     public func registerForConnectionEvents(options: [CBConnectionEventMatchingOption: Any]? = nil) {
         self.cbCentralManager.registerForConnectionEvents(options: options)
     }
+    #endif
 
     /// Cancels an active or pending local connection to a peripheral.
     public func cancelPeripheralConnection(_ peripheral: Peripheral) async throws {
@@ -201,10 +202,11 @@ public final class CentralManager: Sendable {
     }
 
     /// Returns a Boolean that indicates whether the device supports a specific set of features.
-    @available(macOS, unavailable)
+    #if !os(macOS)
     public static func supports(_ features: CBCentralManager.Feature) -> Bool {
         CBCentralManager.supports(features)
     }
+    #endif
     
     /// Creates the async stream where scan data will get added as part of scanning for peripherals.
     /// - Note: The stream is responsible for starting scan.

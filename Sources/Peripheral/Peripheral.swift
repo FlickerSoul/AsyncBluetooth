@@ -91,12 +91,14 @@ public final class Peripheral: Sendable {
     }
     
     /// Attempts to open an L2CAP channel to the peripheral using the supplied Protocol/Service Multiplexer (PSM).
+    #if !os(macOS)
     @available(iOS 11.0, *)
     public func openL2CAPChannel(_ PSM: CBL2CAPPSM) async throws -> CBL2CAPChannel? {
         try await self.context.openL2CAPChannelExecutor.enqueue { [weak self] in
             self?.cbPeripheral.openL2CAPChannel(PSM)
         }
     }
+    #endif
     
     /// Cancels all pending operations, and stops awaiting for any responses.
     public func cancelAllOperations() async {

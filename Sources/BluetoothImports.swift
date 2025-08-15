@@ -28,20 +28,20 @@ extension CBMCentralManager {
 #else
 @preconcurrency import CoreBluetooth
 
-public typealias CBManagerState = CBManagerState
-public typealias CBCentralManager = CBCentralManager
-public typealias CBCentralManagerDelegate = CBCentralManagerDelegate
-public typealias CBPeripheral = CBPeripheral
-public typealias CBUUID = CBUUID
-public typealias CBConnectionEventMatchingOption = CBConnectionEventMatchingOption
-public typealias CBPeripheralState = CBPeripheralState
-public typealias CBConnectionEvent = CBConnectionEvent
-public typealias CBService = CBService
-public typealias CBCharacteristic = CBCharacteristic
-public typealias CBL2CAPPSM = CBL2CAPPSM
-public typealias CBL2CAPChannel = CBL2CAPChannel
-public typealias CBDescriptor = CBDescriptor
-public typealias CBCharacteristicProperties = CBCharacteristicProperties
-public typealias CBCharacteristicWriteType = CBCharacteristicWriteType
-public typealias CBPeripheralDelegate = CBPeripheralDelegate
+public typealias CBManagerState = CoreBluetooth.CBManagerState
+public typealias CBCentralManager = CoreBluetooth.CBCentralManager
+public typealias CBCentralManagerDelegate = CoreBluetooth.CBCentralManagerDelegate
+public typealias CBPeripheral = CoreBluetooth.CBPeripheral
+public typealias CBUUID = CoreBluetooth.CBUUID
+public typealias CBConnectionEventMatchingOption = CoreBluetooth.CBConnectionEventMatchingOption
+public typealias CBPeripheralState = CoreBluetooth.CBPeripheralState
+public typealias CBConnectionEvent = CoreBluetooth.CBConnectionEvent
+public typealias CBService = CoreBluetooth.CBService
+public typealias CBCharacteristic = CoreBluetooth.CBCharacteristic
+public typealias CBL2CAPPSM = CoreBluetooth.CBL2CAPPSM
+public typealias CBL2CAPChannel = CoreBluetooth.CBL2CAPChannel
+public typealias CBDescriptor = CoreBluetooth.CBDescriptor
+public typealias CBCharacteristicProperties = CoreBluetooth.CBCharacteristicProperties
+public typealias CBCharacteristicWriteType = CoreBluetooth.CBCharacteristicWriteType
+public typealias CBPeripheralDelegate = CoreBluetooth.CBPeripheralDelegate
 #endif

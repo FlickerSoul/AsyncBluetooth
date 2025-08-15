@@ -55,7 +55,7 @@ public final class CentralManager: Sendable {
         #if DEBUG
         self.init(cbCentralManager: .using(delegate: nil, queue: dispatchQueue, options: options))
         #else
-        self.init(CBCentralManager(delegate: nil, queue: dispatchQueue, options: options))
+        self.init(cbCentralManager: CBCentralManager(delegate: nil, queue: dispatchQueue, options: options))
         #endif
     }
     

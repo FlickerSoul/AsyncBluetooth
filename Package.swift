@@ -25,9 +25,6 @@ let package = Package(
     targets: [
         .target(
             name: "AsyncBluetooth",
-            dependencies: [
-                .product(name: "CoreBluetoothMock", package: "ios-corebluetooth-mock"),
-            ],
             path: "Sources",
             resources: [
                 .copy("PrivacyInfo.xcprivacy")
@@ -36,9 +33,13 @@ let package = Package(
         .target(
             name: "AsyncBluetoothDebug",
             dependencies: [
-                .target(name: "AsyncBluetooth")
+                .product(name: "CoreBluetoothMock", package: "ios-corebluetooth-mock"),
             ],
-            path: "Debug",
+            
+            path: "DebugSources",
+            resources: [
+                .copy("PrivacyInfo.xcprivacy")
+            ],
             swiftSettings: [
                 .define("CBMDebug")
             ]

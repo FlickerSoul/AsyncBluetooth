@@ -40,7 +40,7 @@ let package = Package(
             ],
             path: "Debug",
             swiftSettings: [
-                .define("DEBUG")
+                .define("CBMDebug")
             ]
         ),
         .testTarget(

@@ -52,7 +52,7 @@ public final class CentralManager: Sendable {
     
     public convenience init(dispatchQueue: DispatchQueue? = nil, options: [String: Any]? = nil) {
         // FIXME: adding delegate later could cause data race? 
-        #if DEBUG
+        #if CBMDebug
         self.init(cbCentralManager: .using(delegate: nil, queue: dispatchQueue, options: options))
         #else
         self.init(cbCentralManager: CBCentralManager(delegate: nil, queue: dispatchQueue, options: options))

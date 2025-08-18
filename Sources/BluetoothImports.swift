@@ -1,4 +1,4 @@
-#if DEBUG
+#if CBMDebug
 @preconcurrency import CoreBluetoothMock
 import Foundation
 

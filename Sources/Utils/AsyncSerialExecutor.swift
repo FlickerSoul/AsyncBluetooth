@@ -4,15 +4,25 @@ import Foundation
 
 /// Executes queued work serially, in the order they where added (FIFO). After work has started, this class will await
 /// until the client completes it before taking on the next work.
-actor AsyncSerialExecutor<Value> {
-    
-    typealias Constants = AsyncSerialExecutorConstants
-    
-    enum AsyncSerialExecutor: Error {
-        case notExecutingWork
-        case canceled
-        case executorDeinitialized
+
+public enum AsyncSerialExecutorError: Error {
+    case notExecutingWork
+    case canceled
+    case executorDeinitialized
+}
+
+extension AsyncSerialExecutorError: LocalizedError {
+    public var errorDescription: String? {
+        switch self {
+        case .notExecutingWork: "There's no work being executed currently."
+        case .canceled: "The work was canceled."
+        case .executorDeinitialized: "The executor was deinitialized before the work could complete."
+        }
     }
+}
+
+actor AsyncSerialExecutor<Value> {
+    typealias Constants = AsyncSerialExecutorConstants
     
     private struct QueuedWork {
         let id: UUID
@@ -68,7 +78,7 @@ actor AsyncSerialExecutor<Value> {
         }
         
         guard let currentWork = self.currentWork else {
-            throw AsyncSerialExecutor.notExecutingWork
+            throw AsyncSerialExecutorError.notExecutingWork
         }
         
         currentWork.continuation.resume(with: result)
@@ -101,7 +111,7 @@ actor AsyncSerialExecutor<Value> {
         let queuedWork = self.queue.removeFirst()
         
         guard !queuedWork.isCanceled else {
-            queuedWork.continuation.resume(throwing: AsyncSerialExecutor.canceled)
+            queuedWork.continuation.resume(throwing: AsyncSerialExecutorError.canceled)
             self.scheduleDequeue()
             return
         }
@@ -118,7 +128,7 @@ actor AsyncSerialExecutor<Value> {
             self.markQueuedWorkAsCanceled(id: id)
             return
         }
-        currentWork.continuation.resume(throwing: AsyncSerialExecutor.canceled)
+        currentWork.continuation.resume(throwing: AsyncSerialExecutorError.canceled)
         self.currentWork = nil
         self.scheduleDequeue()
     }
